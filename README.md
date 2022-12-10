@@ -12,6 +12,8 @@ $ npm install
 
 ## Running the app
 
+NOTE: You have to copy the `.env.example` file to `.env` and fill the variables with your own values.
+
 ```bash
 # development
 $ npm run start
