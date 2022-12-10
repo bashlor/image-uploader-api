@@ -1,5 +1,7 @@
 import {
   Controller,
+  ForbiddenException,
+  Get,
   HttpStatus,
   ParseFilePipeBuilder,
   Post,
@@ -41,5 +43,10 @@ export class AppController {
     await this.storage.putBlob(key, file.buffer);
 
     return { link: `https://${bucketName}.${s3Endpoint}/${key}` };
+  }
+
+  @Get('/')
+  async index() {
+    throw new ForbiddenException('Access denied');
   }
 }
