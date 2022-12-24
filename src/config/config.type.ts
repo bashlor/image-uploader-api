@@ -1,6 +1,7 @@
 type Config = {
   host: string;
   port: number;
+  domainURL: string;
   storage: StorageConfig;
 };
 
