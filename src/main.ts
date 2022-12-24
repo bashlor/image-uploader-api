@@ -7,7 +7,7 @@ async function bootstrap() {
   const config = app.get<ConfigService>(ConfigService);
 
   app.enableCors({
-    origin: config.get('domainURL'),
+    origin: new URL(config.get('domainURL')).href,
   });
   await app.listen(3000);
 }
