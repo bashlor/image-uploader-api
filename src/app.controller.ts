@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { StorageService } from './services/storage.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 import { TStorageConfig } from './config/config.type';
 
