@@ -3,6 +3,7 @@ type Config = {
   port: number;
   domainURL: string;
   storage: StorageConfig;
+  allowedOrigins: string[];
 };
 
 type StorageConfig = {

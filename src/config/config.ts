@@ -4,6 +4,7 @@ export default (): TConfig => ({
   host: process.env.HOST,
   port: parseInt(process.env.PORT, 10) || 3000,
   domainURL: process.env.DOMAIN_URL,
+  allowedOrigins: new String(process.env.ALLOWED_ORIGINS).split(','),
   storage: {
     S3key: process.env.S3_KEY,
     S3secret: process.env.S3_SECRET,
