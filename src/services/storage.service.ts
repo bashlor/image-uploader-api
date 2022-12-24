@@ -1,9 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AWSError, S3 } from 'aws-sdk';
 import { TConfig, TStorageConfig } from '../config/config.type';
 import { PromiseResult } from 'aws-sdk/lib/request';
-import * as Stream from 'stream';
 
 @Injectable()
 export class StorageService {
