@@ -8,11 +8,18 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+
 import { StorageService } from './services/storage.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { v4 as uuid } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 import { TStorageConfig } from './config/config.type';
+
+
+// Avoid error :  Namespace 'global.Express' has no exported member 'Multer'
+import { Express, Request } from 'express';
+import { Multer } from 'multer';
+type File = Express.Multer.File;
 
 @Controller()
 export class AppController {
@@ -33,7 +40,7 @@ export class AppController {
           errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
         }),
     )
-    file: Express.Multer.File,
+    file: File,
   ) {
     const bucketName = this.config.get<TStorageConfig>('storage').S3bucket;
     const s3Endpoint = this.config.get<TStorageConfig>('storage').S3endpoint;
