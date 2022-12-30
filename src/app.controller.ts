@@ -33,14 +33,14 @@ export class AppController {
           errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
         }),
     )
-    file,
+    file: Express.Multer.File,
   ) {
     const bucketName = this.config.get<TStorageConfig>('storage').S3bucket;
     const s3Endpoint = this.config.get<TStorageConfig>('storage').S3endpoint;
 
     const key = `${uuid()}-${file.originalname}`;
 
-    await this.storage.putBlob(key, file.buffer);
+    await this.storage.putBlob(key, file);
 
     return { link: `https://${bucketName}.${s3Endpoint}/${key}` };
   }

@@ -23,12 +23,18 @@ export class StorageService {
   }
 
   async putBlob(
-    blobName: string,
-    blob: Buffer,
+    filename: string,
+    file: Express.Multer.File,
   ): Promise<PromiseResult<S3.PutObjectOutput, AWSError>> {
-    const params = { Bucket: this.BUCKET, Key: blobName, Body: blob, ACL: 'public-read' };
-    const uploadedBlob = await this.s3.putObject(params).promise();
+    const params = {
+      Bucket: this.BUCKET,
+      ContentType: file.mimetype,
+      Key: filename,
+      Body: file.buffer,
+      ACL: 'public-read',
+    };
+    const uploadedFile = await this.s3.putObject(params).promise();
 
-    return uploadedBlob;
+    return uploadedFile;
   }
 }
