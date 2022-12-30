@@ -15,12 +15,6 @@ import { v4 as uuid } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 import { TStorageConfig } from './config/config.type';
 
-
-// Avoid error :  Namespace 'global.Express' has no exported member 'Multer'
-import { Express, Request } from 'express';
-import { Multer } from 'multer';
-type File = Express.Multer.File;
-
 @Controller()
 export class AppController {
   constructor(private readonly storage: StorageService, private readonly config: ConfigService) {}
@@ -40,7 +34,7 @@ export class AppController {
           errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
         }),
     )
-    file: File,
+    file: any,
   ) {
     const bucketName = this.config.get<TStorageConfig>('storage').S3bucket;
     const s3Endpoint = this.config.get<TStorageConfig>('storage').S3endpoint;

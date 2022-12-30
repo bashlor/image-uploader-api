@@ -4,12 +4,6 @@ import { AWSError, S3 } from 'aws-sdk';
 import { TConfig, TStorageConfig } from '../config/config.type';
 import { PromiseResult } from 'aws-sdk/lib/request';
 
-// Avoid error :  Namespace 'global.Express' has no exported member 'Multer'
-import { Express, Request } from 'express';
-import { Multer } from 'multer';
-
-type File = Express.Multer.File;
-
 @Injectable()
 export class StorageService {
   private readonly s3: S3;
@@ -28,10 +22,7 @@ export class StorageService {
     this.BUCKET = this.configService.get<TStorageConfig>('storage').S3bucket;
   }
 
-  async putBlob(
-    filename: string,
-    file: File,
-  ): Promise<PromiseResult<S3.PutObjectOutput, AWSError>> {
+  async putBlob(filename: string, file: any): Promise<PromiseResult<S3.PutObjectOutput, AWSError>> {
     const params = {
       Bucket: this.BUCKET,
       ContentType: file.mimetype,
