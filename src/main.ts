@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
+import {ForbiddenException} from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,7 +15,7 @@ async function bootstrap() {
       if (allowedOrigins.indexOf(origin) !== -1) {
         return callback(null, true);
       }
-      return callback(new Error('Not allowed by CORS'), true);
+      return callback(new ForbiddenException('Not allowed by CORS'), true);
     },
     methods: ['POST'],
     credentials: true,
