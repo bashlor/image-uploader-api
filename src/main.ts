@@ -7,6 +7,8 @@ async function bootstrap() {
   const config = app.get<ConfigService>(ConfigService);
   const allowedOrigins = config.get<string[]>('allowedOrigins');
 
+  const port = config.get<number>('port');
+
   app.enableCors({
     origin: function (origin, callback) {
       if (allowedOrigins.indexOf(origin) !== -1) {
@@ -17,6 +19,6 @@ async function bootstrap() {
     methods: ['POST'],
     credentials: true,
   });
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
