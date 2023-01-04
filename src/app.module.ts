@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { FallbackController } from './fallback.controller';
 import { ConfigModule } from '@nestjs/config';
 import { StorageService } from './services/storage.service';
 import config from './config/config';
@@ -18,7 +19,7 @@ import { APP_GUARD } from '@nestjs/core';
       limit: 10,
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, FallbackController],
   providers: [
     {
       provide: APP_GUARD,
