@@ -45,9 +45,4 @@ export class AppController {
 
     return { link: `https://${bucketName}.${s3Endpoint}/${key}` };
   }
-
-  @Get('/')
-  async index() {
-    throw new ForbiddenException('Access denied');
-  }
 }
